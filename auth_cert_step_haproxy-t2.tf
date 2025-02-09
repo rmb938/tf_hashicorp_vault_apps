@@ -39,7 +39,6 @@ resource "vault_cert_auth_backend_role" "haproxy-t2" {
 resource "consul_acl_policy" "haproxy-t2" {
   name  = vault_policy.haproxy-t2.name
   rules = <<-RULE
-    # Allow reading all services
     service "${vault_policy.haproxy-t2.name}" {
       policy = "write"
     }
