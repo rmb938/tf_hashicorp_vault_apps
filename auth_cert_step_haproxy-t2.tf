@@ -5,6 +5,10 @@ resource "vault_policy" "haproxy-t2" {
 path "pki_step_x5c_haproxy_intermediate/issue/*" {
   capabilities = ["update"]
 }
+
+path "consul/creds/haproxy-t2" {
+  capabilities = ["read"]
+}
 EOT
 }
 
@@ -32,15 +36,26 @@ resource "vault_cert_auth_backend_role" "haproxy-t2" {
   ]
 }
 
-resource "vault_consul_secret_backend_role" "haproxy-t2" {
-  for_each = toset(vault_cert_auth_backend_role.haproxy-t2.allowed_common_names)
+resource "consul_acl_policy" "haproxy-t2" {
+  name  = vault_policy.haproxy-t2.name
+  rules = <<-RULE
+    # Allow reading all services
+    service "${vault_policy.haproxy-t2.name}" {
+      policy = "write"
+    }
+    RULE
+}
 
-  name    = each.value
+resource "vault_consul_secret_backend_role" "haproxy-t2" {
+  name    = vault_policy.haproxy-t2.name
   backend = local.consul_mount_path
 
   consul_policies = [
     consul_acl_policy.default_apps.name,
+    consul_acl_policy.haproxy-t2.name,
   ]
 
-  node_identities = ["${each.value}:hl-us-homelab1"]
+  node_identities = [
+    for name in vault_cert_auth_backend_role.haproxy-t2.allowed_common_names : name
+  ]
 }
