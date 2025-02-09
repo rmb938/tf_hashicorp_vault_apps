@@ -55,6 +55,6 @@ resource "vault_consul_secret_backend_role" "haproxy-t2" {
   ]
 
   node_identities = [
-    for name in vault_cert_auth_backend_role.haproxy-t2.allowed_common_names : "${name}:hl-us-homelab1"
+    for name in vault_cert_auth_backend_role.haproxy-t2.allowed_common_names : "${split(".", "${name}")[0]}:hl-us-homelab1"
   ]
 }
