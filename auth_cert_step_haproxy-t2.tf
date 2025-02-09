@@ -6,7 +6,7 @@ path "pki_step_x5c_haproxy_intermediate/issue/*" {
   capabilities = ["update"]
 }
 
-path "consul/creds/haproxy-t2" {
+path "${local.consul_mount_path}/creds/haproxy-t2" {
   capabilities = ["read"]
 }
 EOT
@@ -55,6 +55,6 @@ resource "vault_consul_secret_backend_role" "haproxy-t2" {
   ]
 
   node_identities = [
-    for name in vault_cert_auth_backend_role.haproxy-t2.allowed_common_names : name
+    for name in vault_cert_auth_backend_role.haproxy-t2.allowed_common_names : "${name}:hl-us-homelab1"
   ]
 }
