@@ -1,0 +1,76 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply:
+    permissions:
+      contents: read
+      id-token: write
+
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:githubactions-tf-hashicorp-vault-apps
+
+      - name: Auth GCP
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/455628669441/locations/global/workloadIdentityPools/github-actions/providers/gha-tf-hashicorp-vault'
+
+      - uses: smallstep/action-install-step-cli@main
+
+      - name: Bootstrap Step CLI
+        run: |
+          sudo step ca root /usr/local/share/ca-certificates/smallstep-homelab-prod.crt --ca-url https://hl-us-homelab1-step-ca.tailnet-047c.ts.net --fingerprint 111301fb085dfc83f5390c0be68df3d68f5584853df0cb4c442383c33f2bd83a
+          sudo chmod 0644 /usr/local/share/ca-certificates/smallstep-homelab-prod.crt
+          sudo update-ca-certificates
+          curl https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200/v1/sys/health\?standbyok=true | jq .
+          echo "STEP_CA=$(sudo cat /usr/local/share/ca-certificates/smallstep-homelab-prod.crt | base64 -w 0)" >> $GITHUB_ENV
+
+      - name: Import Secrets
+        id: import-secrets
+        uses: hashicorp/vault-action@v3
+        with:
+          url: https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200
+          caCertificate: ${{ env.STEP_CA }}
+          role: gha_rmb938_tf_hashicorp_vault_apps
+          method: jwt
+          path: jwt-gha
+          exportToken: true
+          secrets: |
+            secret/consul/management_token key | CONSUL_HTTP_TOKEN ;
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.10.3"
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check -diff
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -out tfplan
+
+      - name: Terraform Apply
+        run: terraform apply tfplan
+
+      # https://github.com/hashicorp/vault-action/issues/427
+      - name: Revoke Vault Token
+        if: always()
+        run: |
+          curl -XPOST -sv -H "X-Vault-Token: ${{ env.VAULT_TOKEN }}" https://hl-us-homelab1-hashi-vault-1.tailnet-047c.ts.net:8200/v1/auth/token/revoke-self 
