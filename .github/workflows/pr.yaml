@@ -20,12 +20,12 @@ jobs:
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:githubactions-tf-hashicorp-vault
+          tags: tag:githubactions-tf-hashicorp-vault-apps
 
       - name: Auth GCP
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: 'projects/455628669441/locations/global/workloadIdentityPools/github-actions/providers/gha-tf-hashicorp-vault'
+          workload_identity_provider: 'projects/455628669441/locations/global/workloadIdentityPools/github-actions/providers/gha-tf-hashicorp-vault-apps'
 
       - uses: smallstep/action-install-step-cli@main
 
