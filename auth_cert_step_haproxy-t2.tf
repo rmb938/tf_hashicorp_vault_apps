@@ -9,7 +9,7 @@ EOT
 }
 
 resource "vault_cert_auth_backend_role" "haproxy-t2" {
-  backend = vault_auth_backend.auth_step_cert.path
+  backend = local.step_cert_auth_path
 
   name         = vault_policy.haproxy-t2.name
   display_name = vault_policy.haproxy-t2.name
