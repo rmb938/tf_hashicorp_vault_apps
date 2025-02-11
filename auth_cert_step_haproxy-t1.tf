@@ -2,7 +2,9 @@ resource "vault_policy" "haproxy-t1" {
   name = "haproxy-t1"
 
   policy = <<EOT
-  
+path "${local.consul_mount_path}/creds/haproxy-t1" {
+  capabilities = ["read"]
+}
 EOT
 }
 
