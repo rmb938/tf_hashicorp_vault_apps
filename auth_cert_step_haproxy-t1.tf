@@ -35,7 +35,7 @@ resource "vault_cert_auth_backend_role" "haproxy-t1" {
 resource "consul_acl_policy" "haproxy-t1" {
   name  = vault_policy.haproxy-t1.name
   rules = <<-RULE
-    service "${vault_policy.haproxy-t1.name}" {
+    service_prefix "${vault_policy.haproxy-t1.name}" {
       policy = "write"
     }
     RULE
