@@ -38,6 +38,9 @@ resource "consul_acl_policy" "haproxy-t1" {
     service_prefix "${vault_policy.haproxy-t1.name}" {
       policy = "write"
     }
+    service "prometheus-haproxy-exporter" {
+      policy = "write"
+    }
     RULE
 }
 
