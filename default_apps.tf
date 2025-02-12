@@ -27,5 +27,10 @@ resource "consul_acl_policy" "default_apps" {
     service_prefix "" {
       policy = "read"
     }
+
+    # Allow all apps to register node exporter
+    service "prometheus-node-exporter" {
+      policy = "write"
+    }
     RULE
 }
