@@ -36,6 +36,15 @@ resource "consul_acl_policy" "prometheus" {
     service_prefix "${vault_policy.prometheus.name}" {
       policy = "write"
     }
+
+    # Prometheus needs to read metrics from consul servers
+    # This also allows viewing config and logs
+    # Which probably isn't 100% safe
+    # We probably could do a HAProxy to only expose
+    # the /metrics path.
+    agent_prefix "hashi-consul-" {
+      policy = "read"
+    }
     RULE
 }
 
