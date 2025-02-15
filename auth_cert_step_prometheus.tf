@@ -5,6 +5,10 @@ resource "vault_policy" "prometheus" {
 path "${local.consul_mount_path}/creds/prometheus" {
   capabilities = ["read"]
 }
+
+path "secret/prometheus/*" {
+  capabilities = ["read", "list"]
+}
 EOT
 }
 
