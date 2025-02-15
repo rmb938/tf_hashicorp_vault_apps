@@ -2,7 +2,9 @@ resource "vault_policy" "openstack-postgres" {
   name = "openstack-postgres"
 
   policy = <<EOT
-
+path "${local.consul_mount_path}/creds/openstack-postgres" {
+  capabilities = ["read"]
+}
 EOT
 }
 
