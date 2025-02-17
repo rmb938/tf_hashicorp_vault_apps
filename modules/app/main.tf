@@ -19,7 +19,7 @@ path "${var.secret_mount_path}/consul/encrypt_key" {
 }
 
 # APP SPECIFIC
-path "${var.local.consul_mount_path}/creds/${var.name}" {
+path "${var.consul_mount_path}/creds/${var.name}" {
   capabilities = ["read"]
 }
 
