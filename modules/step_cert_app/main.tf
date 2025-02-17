@@ -52,6 +52,6 @@ resource "vault_consul_secret_backend_role" "role" {
   ]
 
   node_identities = [
-    for name in vault_cert_auth_backend_role.policy.allowed_common_names : "${split(".", "${name}")[0]}:${var.consul_datacenter}"
+    for name in vault_cert_auth_backend_role.role.allowed_common_names : "${split(".", "${name}")[0]}:${var.consul_datacenter}"
   ]
 }
