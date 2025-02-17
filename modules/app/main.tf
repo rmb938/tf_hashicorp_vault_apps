@@ -52,13 +52,19 @@ node_prefix "" {
 service_prefix "" {
   policy = "read"
 }
-
+# Allow to write sessions
+session_prefix "" {
+    policy = "write"
+}
 # Allow all apps to register node exporter
 service "prometheus-node-exporter" {
   policy = "write"
 }
 
 # APP SPECIFIC
+key_prefix "${var.name}" {
+  policy = "write"
+}
 service_prefix "${var.name}" {
   policy = "write"
 }
