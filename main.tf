@@ -16,7 +16,8 @@ terraform {
 }
 
 locals {
-  step_cert_auth_path = "step-cert"
-  secret_mount_path   = "secret"
-  consul_mount_path   = "consul"
+  step_cert_auth_path       = "step-cert"
+  secret_mount_path         = "secret"
+  consul_mount_path         = "consul"
+  consul_datacenter_homelab = "hl-us-homelab1"
 }
