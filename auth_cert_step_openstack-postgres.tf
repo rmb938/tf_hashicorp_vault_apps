@@ -17,4 +17,20 @@ module "openstack-postgres" {
     "192.168.23.71/32",
     "192.168.23.72/32",
   ]
+
+  vault_policy_extra = <<EOT
+path "pki_openstack_postgres_patroni_intermediate/issue/client" {
+  capabilities = ["update"]
+}
+
+path "pki_openstack_postgres_intermediate/issue/user-postgres" {
+  capabilities = ["update"]
+}
+path "pki_openstack_postgres_intermediate/issue/user-replicator" {
+  capabilities = ["update"]
+}
+path "pki_openstack_postgres_intermediate/issue/user-rewind" {
+  capabilities = ["update"]
+}
+EOT
 }
