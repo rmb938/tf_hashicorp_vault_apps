@@ -23,6 +23,10 @@ path "pki_openstack_postgres_patroni_intermediate/issue/client" {
   capabilities = ["update"]
 }
 
+path "pki_openstack_postgres_intermediate/issue/server-pgbouncer" {
+  capabilities = ["update"]
+}
+
 path "pki_openstack_postgres_intermediate/issue/user-postgres" {
   capabilities = ["update"]
 }
