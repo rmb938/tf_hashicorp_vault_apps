@@ -57,7 +57,7 @@ session_prefix "" {
     policy = "write"
 }
 # Allow all apps to register prometheus exporters
-service "prometheus-" {
+session_prefix "prometheus-" {
   policy = "write"
 }
 
