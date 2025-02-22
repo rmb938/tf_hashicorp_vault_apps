@@ -23,7 +23,7 @@ path "pki_openstack_rabbitmq_intermediate/issue/server" {
   capabilities = ["update"]
 }
 
-path "pki_openstack_rabbitmq_intermediate/issue/user-cli" {
+path "pki_openstack_rabbitmq_cluster_intermediate/issue/user-cli" {
   capabilities = ["update"]
 }
 EOT
