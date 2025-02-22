@@ -19,7 +19,11 @@ module "openstack-rabbitmq" {
   ]
 
   vault_policy_extra = <<EOT
-path "pki_openstack_rabbitmq_intermediate/issue/user-root" {
+path "pki_openstack_rabbitmq_intermediate/issue/server" {
+  capabilities = ["update"]
+}
+
+path "pki_openstack_rabbitmq_intermediate/issue/user-cli" {
   capabilities = ["update"]
 }
 EOT
