@@ -22,5 +22,8 @@ module "openstack-keystone" {
 path "pki_openstack_postgres_intermediate/issue/user-keystone" {
   capabilities = ["update"]
 }
+path "pki_openstack_keystone_internal_intermediate/issue/server" {
+  capabilities = ["update"]
+}
 EOT
 }
