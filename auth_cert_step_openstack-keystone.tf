@@ -25,5 +25,8 @@ path "pki_openstack_postgres_intermediate/issue/user-keystone" {
 path "pki_openstack_keystone_internal_intermediate/issue/server" {
   capabilities = ["update"]
 }
+path "pki_openstack_keystone_internal_intermediate/issue/user-admin" {
+  capabilities = ["update"]
+}
 EOT
 }
