@@ -29,10 +29,10 @@ path "pki_openstack_keystone_internal_intermediate/issue/user-admin" {
   capabilities = ["update"]
 }
 
-path "transit_openstack_keystone_token/sign/token/sha2-384" {
+path "transit_openstack_keystone_token/sign/token" {
   capabilities = ["create"]
 }
-path "transit_openstack_keystone_token/verify/token/sha2-384" {
+path "transit_openstack_keystone_token/verify/token" {
   capabilities = ["create"]
 }
 path "transit_openstack_keystone_token/keys/token" {
