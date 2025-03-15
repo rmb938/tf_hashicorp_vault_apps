@@ -30,20 +30,20 @@ path "pki_openstack_keystone_internal_intermediate/issue/user-admin" {
 }
 
 path "transit_openstack_keystone_token/sign/token" {
-  capabilities = ["create"]
+  capabilities = ["update"]
 }
 path "transit_openstack_keystone_token/verify/token" {
-  capabilities = ["create"]
+  capabilities = ["update"]
 }
 path "transit_openstack_keystone_token/keys/token" {
   capabilities = ["read"]
 }
 
 path "transit_openstack_keystone_credential/encrypt/credential" {
-  capabilities = ["create"]
+  capabilities = ["update"]
 }
 path "transit_openstack_keystone_credential/decrypt/credential" {
-  capabilities = ["create"]
+  capabilities = ["update"]
 }
 path "transit_openstack_keystone_credential/keys/credential" {
   capabilities = ["read"]
