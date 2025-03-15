@@ -35,12 +35,18 @@ path "transit_openstack_keystone_token/sign/token/sha2-384" {
 path "transit_openstack_keystone_token/verify/token/sha2-384" {
   capabilities = ["create"]
 }
+path "transit_openstack_keystone_token/keys/token" {
+  capabilities = ["read"]
+}
 
 path "transit_openstack_keystone_credential/encrypt/credential" {
   capabilities = ["create"]
 }
 path "transit_openstack_keystone_credential/decrypt/credential" {
   capabilities = ["create"]
+}
+path "transit_openstack_keystone_credential/keys/credential" {
+  capabilities = ["read"]
 }
 EOT
 }
