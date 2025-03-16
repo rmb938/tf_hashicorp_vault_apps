@@ -39,6 +39,16 @@ path "transit_openstack_keystone_token/keys/token" {
   capabilities = ["read"]
 }
 
+path "transit_openstack_keystone_receipt/sign/token" {
+  capabilities = ["update"]
+}
+path "transit_openstack_keystone_receipt/verify/token" {
+  capabilities = ["update"]
+}
+path "transit_openstack_keystone_receipt/keys/token" {
+  capabilities = ["read"]
+}
+
 path "transit_openstack_keystone_credential/encrypt/credential" {
   capabilities = ["update"]
 }
