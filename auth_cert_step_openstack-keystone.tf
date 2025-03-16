@@ -22,12 +22,6 @@ module "openstack-keystone" {
 path "pki_openstack_postgres_intermediate/issue/user-keystone" {
   capabilities = ["update"]
 }
-path "pki_openstack_keystone_internal_intermediate/issue/server" {
-  capabilities = ["update"]
-}
-path "pki_openstack_keystone_internal_intermediate/issue/user-admin" {
-  capabilities = ["update"]
-}
 
 path "transit_openstack_keystone_token/sign/token" {
   capabilities = ["update"]
@@ -39,13 +33,13 @@ path "transit_openstack_keystone_token/keys/token" {
   capabilities = ["read"]
 }
 
-path "transit_openstack_keystone_receipt/sign/token" {
+path "transit_openstack_keystone_receipt/sign/receipt" {
   capabilities = ["update"]
 }
-path "transit_openstack_keystone_receipt/verify/token" {
+path "transit_openstack_keystone_receipt/verify/receipt" {
   capabilities = ["update"]
 }
-path "transit_openstack_keystone_receipt/keys/token" {
+path "transit_openstack_keystone_receipt/keys/receipt" {
   capabilities = ["read"]
 }
 
