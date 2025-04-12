@@ -22,5 +22,8 @@ module "openstack-cinder" {
 path "pki_openstack_postgres_intermediate/issue/user-cinder" {
   capabilities = ["update"]
 }
+path "pki_openstack_rabbitmq_intermediate/issue/user-cinder" {
+  capabilities = ["update"]
+}
 EOT
 }
