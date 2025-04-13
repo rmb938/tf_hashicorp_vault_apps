@@ -19,6 +19,10 @@ module "openstack-postgres" {
   ]
 
   vault_policy_extra = <<EOT
+path "pki_openstack_postgres_intermediate/roles" {
+  capabilities = ["read", "list"]
+}
+
 path "pki_openstack_postgres_patroni_intermediate/issue/client" {
   capabilities = ["update"]
 }
