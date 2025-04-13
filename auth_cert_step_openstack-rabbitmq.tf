@@ -19,6 +19,10 @@ module "openstack-rabbitmq" {
   ]
 
   vault_policy_extra = <<EOT
+path "pki_openstack_rabbitmq_intermediate/roles" {
+  capabilities = ["read", "list"]
+}
+
 path "pki_openstack_rabbitmq_intermediate/issue/server" {
   capabilities = ["update"]
 }
