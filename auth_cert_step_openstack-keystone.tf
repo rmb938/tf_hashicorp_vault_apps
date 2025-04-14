@@ -52,5 +52,9 @@ path "transit_openstack_keystone_credential/decrypt/credential" {
 path "transit_openstack_keystone_credential/keys/credential" {
   capabilities = ["read"]
 }
+
+path "${local.secret_mount_path}/openstack-keystone/service-users/+" {
+  capabilities = ["create", "update"]
+}
 EOT
 }
