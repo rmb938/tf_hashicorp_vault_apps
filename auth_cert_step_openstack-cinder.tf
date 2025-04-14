@@ -25,5 +25,9 @@ path "pki_openstack_postgres_intermediate/issue/user-cinder" {
 path "pki_openstack_rabbitmq_intermediate/issue/user-cinder" {
   capabilities = ["update"]
 }
+
+path "${local.secret_mount_path}/openstack-keystone/service-users/cinder" {
+  capabilities = ["read"]
+}
 EOT
 }

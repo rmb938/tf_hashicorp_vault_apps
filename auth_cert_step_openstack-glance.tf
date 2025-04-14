@@ -22,5 +22,9 @@ module "openstack-glance" {
 path "pki_openstack_postgres_intermediate/issue/user-glance" {
   capabilities = ["update"]
 }
+
+path "${local.secret_mount_path}/openstack-keystone/service-users/glance" {
+  capabilities = ["read"]
+}
 EOT
 }
