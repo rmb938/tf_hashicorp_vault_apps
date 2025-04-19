@@ -17,4 +17,13 @@ module "openstack-ovn-northd" {
     "192.168.23.98/32",
     "192.168.23.99/32",
   ]
+
+  vault_policy_extra = <<EOT
+path "pki_openstack_ovn_ovsdb_intermediate/issue/server" {
+  capabilities = ["update"]
+}
+path "pki_openstack_ovn_ovsdb_intermediate/issue/user-northd" {
+  capabilities = ["update"]
+}
+EOT
 }
