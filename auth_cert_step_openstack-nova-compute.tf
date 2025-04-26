@@ -13,4 +13,14 @@ module "openstack-nova-compute" {
   token_bound_cidrs = [
     "192.168.23.12/32",
   ]
+
+  vault_policy_extra = <<EOT
+path "pki_openstack_rabbitmq_intermediate/issue/user-nova-compute" {
+  capabilities = ["update"]
+}
+
+path "${local.secret_mount_path}/openstack-keystone/service-users/nova-compute" {
+  capabilities = ["read"]
+}
+EOT
 }
