@@ -21,6 +21,9 @@ path "pki_openstack_rabbitmq_intermediate/issue/user-nova-compute" {
 path "pki_openstack_ovn_ovsdb_intermediate/issue/user-neutron-compute" {
   capabilities = ["update"]
 }
+path "pki_openstack_ovn_ovsdb_intermediate/issue/user-ovn-controller" {
+  capabilities = ["update"]
+}
 
 path "${local.secret_mount_path}/openstack-keystone/service-users/nova-compute" {
   capabilities = ["read"]
