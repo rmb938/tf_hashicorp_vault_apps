@@ -25,7 +25,7 @@ path "pki_openstack_postgres_intermediate/issue/user-octavia" {
 path "pki_openstack_rabbitmq_intermediate/issue/user-octavia" {
   capabilities = ["update"]
 }
-path "pki_openstack_ovn_ovsdb_intermediate/issue/user-octavia-controller" {
+path "pki_openstack_ovn_ovsdb_intermediate/issue/user-octavia" {
   capabilities = ["update"]
 }
 
