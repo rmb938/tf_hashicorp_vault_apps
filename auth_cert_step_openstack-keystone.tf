@@ -53,6 +53,10 @@ path "transit_openstack_keystone_credential/keys/credential" {
   capabilities = ["read"]
 }
 
+path "${local.secret_mount_path}/openstack-keystone/admin-password" {
+  capabilities = ["create", "read", "update"]
+}
+
 path "${local.secret_mount_path}/openstack-keystone/service-users/+" {
   capabilities = ["create", "read", "update"]
 }
