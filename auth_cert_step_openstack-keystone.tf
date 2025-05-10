@@ -60,5 +60,8 @@ path "${local.secret_mount_path}/openstack-keystone/admin-password" {
 path "${local.secret_mount_path}/openstack-keystone/service-users/+" {
   capabilities = ["create", "read", "update"]
 }
+path "${local.secret_mount_path}/openstack-keystone/project-users/+" {
+  capabilities = ["create", "read", "update"]
+}
 EOT
 }
