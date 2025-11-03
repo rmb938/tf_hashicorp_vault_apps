@@ -13,4 +13,10 @@ module "minio" {
   token_bound_cidrs = [
     "192.168.23.102/32",
   ]
+
+  consul_policy_extra = <<-RULE
+service_prefix "garage-" {
+  policy = "write"
+}
+RULE
 }
